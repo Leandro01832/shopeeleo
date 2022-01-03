@@ -1,0 +1,57 @@
+﻿@model IEnumerable<business.classes.Produto>
+
+@{
+    ViewData["Title"] = "Index";
+    var numero = Model.ToList()[0].LojaId;
+}
+
+
+
+<form>
+    <input style="width: 40%;" id="numberPagina" placeholder="Dê me o numero da pagina da loja" type="number" min="1" max="@Model.ToList().Count" />
+    <input style="width: 40%;" id="texto" placeholder="Dê me o nome do produto" type="text" />
+    <a href="#" id="Entrar">Acessar</a>
+
+</form>
+<hr />
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Loja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loja.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preco)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
