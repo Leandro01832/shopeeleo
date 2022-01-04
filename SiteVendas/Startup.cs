@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SiteVendas.Data;
 using SiteVendas.Models.Repository;
+using System;
 
 namespace SiteVendas
 {
@@ -50,10 +51,12 @@ namespace SiteVendas
                 options.Password.RequiredLength = 8;
                 options.Password.RequiredUniqueChars = 1;
             });
-            
+
+            services.AddTransient<IDataService, DataService>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IHttpHelper, HttpHelper>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            services.AddTransient<IRepositoryLoja, LojaRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
             services.AddTransient<IClienteRepository, RepositoryCliente>();
 
@@ -61,7 +64,8 @@ namespace SiteVendas
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -87,6 +91,9 @@ namespace SiteVendas
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var dataService = serviceProvider.GetRequiredService<IDataService>();
+            dataService.InicializaDBAsync(serviceProvider).Wait();
         }
     }
 }

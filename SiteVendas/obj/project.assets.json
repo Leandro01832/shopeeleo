@@ -13023,11 +13023,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\RedeVendas\\SiteVendas\\SiteVendas.csproj",
+      "projectUniqueName": "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\shopeeleo\\shopeeleo\\SiteVendas\\SiteVendas.csproj",
       "projectName": "SiteVendas",
-      "projectPath": "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\RedeVendas\\SiteVendas\\SiteVendas.csproj",
+      "projectPath": "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\shopeeleo\\shopeeleo\\SiteVendas\\SiteVendas.csproj",
       "packagesPath": "C:\\Users\\leand\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\RedeVendas\\SiteVendas\\obj\\",
+      "outputPath": "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\shopeeleo\\shopeeleo\\SiteVendas\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13046,8 +13046,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\RedeVendas\\business\\business.csproj": {
-              "projectPath": "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\RedeVendas\\business\\business.csproj"
+            "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\shopeeleo\\shopeeleo\\business\\business.csproj": {
+              "projectPath": "C:\\Users\\leand\\Documents\\Visual Studio 2017\\C#\\shopeeleo\\shopeeleo\\business\\business.csproj"
             }
           }
         }

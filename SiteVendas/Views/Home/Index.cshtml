@@ -4,14 +4,13 @@
 @model IEnumerable<business.classes.Produto>
 
 <form>
-<input style="width: 100%;" id="number" placeholder="Dê me a chave para entrar na loja" type="number" />
+<input style="width: 100%;" id="number" placeholder="Dê me a chave para entrar na loja" 
+       type="number" min="1" max="@ViewBag.totalLojas" />
 <a href="#" id="Entrar">Entrar na loja</a>
 
 </form>
 
 <h3>Catálogo</h3>
-
-
 
 <div id="my-carousel" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->

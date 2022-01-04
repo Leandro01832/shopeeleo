@@ -20,19 +20,23 @@ namespace SiteVendas.Controllers
         public IClienteRepository ClienteRepository { get; }
         public UserManager<IdentityUser> UserManager { get; }
         public IHttpHelper HttpHelper { get; }
+        public IRepositoryLoja RepositoryLoja { get; }
 
         public HomeController(IProdutoRepository produtoRepository, IPedidoRepository pedidoRepository,
-            IClienteRepository clienteRepository, UserManager<IdentityUser> userManager, IHttpHelper httpHelper)
+            IClienteRepository clienteRepository, UserManager<IdentityUser> userManager, IHttpHelper httpHelper,
+             IRepositoryLoja repositoryLoja)
         {
             ProdutoRepository = produtoRepository;
             PedidoRepository = pedidoRepository;
             ClienteRepository = clienteRepository;
             UserManager = userManager;
             HttpHelper = httpHelper;
+            RepositoryLoja = repositoryLoja;
         }
 
         public ActionResult Index()
         {
+            ViewBag.totalLojas = RepositoryLoja.GetAll().Count;
             return View(ProdutoRepository.GetAll());
         }
 
