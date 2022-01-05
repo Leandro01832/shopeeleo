@@ -22,29 +22,45 @@ namespace SiteVendas.Controllers
         // GET: Produto
         [Route("Produto/Index/{id}")]
         [Route("Loja/{id}")]
-        public async Task<IActionResult> Index(int id)
+        [Route("Loja/{id}/{pagina}")]
+        public async Task<IActionResult> Index(int id, int? pagina)
         {
-            var applicationDbContext = _context.Produto.Include(p => p.Loja).Where(l => l.LojaId == id);
-            return View(await applicationDbContext.ToListAsync());
+            int numeroPagina = (pagina ?? 1);
+            const int TAMANHO_PAGINA = 10;
+
+            ViewBag.pagina = numeroPagina;
+            ViewBag.loja = id;
+            var applicationDbContext = await _context.Produto.Include(p => p.Loja)
+                .Where(l => l.LojaId == id)
+                .Skip((numeroPagina - 1) * TAMANHO_PAGINA)
+                .Take(TAMANHO_PAGINA).ToListAsync();
+            return View(applicationDbContext);
         }
 
         // GET: Produto/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [Route("Produto/Details/{id}/{pagina}")]
+        public async Task<IActionResult> Details(int id, int pagina)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var applicationDbContext = await _context.Produto.Include(p => p.Loja)
+                .Where(l => l.LojaId == id).ToListAsync();
 
-            var produto = await _context.Produto
-                .Include(p => p.Loja)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (produto == null)
-            {
-                return NotFound();
-            }
+            ViewBag.pagina = pagina;
 
-            return View(produto);
+            return PartialView(applicationDbContext[pagina - 1]);
+        }
+
+        [Route("Produto/Details2/{id}")]
+        public async Task<IActionResult> Details2(int id)
+        {
+            var produto = await _context.Produto.Include(p => p.Loja)
+                .FirstOrDefaultAsync(l => l.Id == id);
+
+            var produtos = await _context.Produto.Include(p => p.Loja)
+                .Where(l => l.LojaId == produto.LojaId).ToListAsync();
+
+            ViewBag.pagina = produtos.IndexOf(produto) + 1;
+
+            return PartialView(produto);
         }
 
         // GET: Produto/Create

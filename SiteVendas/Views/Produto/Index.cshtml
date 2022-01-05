@@ -2,19 +2,25 @@
 
 @{
     ViewData["Title"] = "Index";
-    var numero = Model.ToList()[0].LojaId;
+    var quantidade = Model.ToList().Count;
+
 }
 
 
 
 <form>
-    <input style="width: 40%;" id="numberPagina" placeholder="Dê me o numero da pagina da loja" type="number" min="1" max="@Model.ToList().Count" />
-    <input style="width: 40%;" id="texto" placeholder="Dê me o nome do produto" type="text" />
-    <a href="#" id="Entrar">Acessar</a>
-
+    <input style="width: 40%;" id="texto" placeholder="Informe o nome do produto" type="text" />
+    <a href="#" id="Entrar">Buscar</a>
 </form>
+<input type="number" id="numberLista" style="width: 50%;" placeholder="informe o numero da lista" />
+<a href="#" id="acessarLista" class="btn btn-primary">Acessar lista</a>
+
+<input type="number" id="numberPagina" style="width: 50%;" placeholder="informe o numero da pagina" />
+<a href="#" id="acessarPagina2" class="btn btn-danger btnPagina">Acessar pagina</a>
 <hr />
 <hr />
+
+<h4>Lista @ViewBag.pagina</h4>
 
 <table class="table">
     <thead>
@@ -45,13 +51,75 @@
                     @Html.DisplayFor(modelItem => item.Preco)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a href="#" id="acessarPagina2" data-value="@item.Id" class="btn btn-danger btnPagina2">Acessar pagina</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div id="conteudoModal">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div id="conteudoModal2">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#numberLista").change(function () {
+                document.getElementById("acessarLista").href = "/Loja/@ViewBag.loja/";
+                document.getElementById("acessarLista").href += $(this).val();
+            });
+
+            $("#acessarPagina").change(function () {
+                document.getElementById("acessarPagina").href = "/Loja/@ViewBag.loja/";
+                document.getElementById("acessarPagina").href += $(this).val();
+            });
+
+            $(".btnPagina").click(function () {
+                $("#conteudoModal").load("/Produto/Details/@ViewBag.loja/" + $("#numberPagina").val(), function () {
+                    $("#myModal").modal("show");
+                });
+            });
+
+            $(".btnPagina2").click(function () {
+
+                var id = $(this).data("value");
+
+                $("#conteudoModal2").load("/Produto/Details2/" + id, function () {
+                    $("#myModal2").modal("show");
+                });
+            });
+
+        });
+    </script>
+
+}
 
 

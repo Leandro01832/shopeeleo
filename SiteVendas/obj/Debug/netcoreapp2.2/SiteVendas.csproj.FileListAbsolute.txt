@@ -102,3 +102,4 @@ C:\Users\leand\Documents\Visual Studio 2017\C#\shopeeleo\shopeeleo\SiteVendas\ob
 C:\Users\leand\Documents\Visual Studio 2017\C#\shopeeleo\shopeeleo\SiteVendas\obj\Debug\netcoreapp2.2\SiteVendas.csproj.CopyComplete
 C:\Users\leand\Documents\Visual Studio 2017\C#\shopeeleo\shopeeleo\SiteVendas\obj\Debug\netcoreapp2.2\SiteVendas.dll
 C:\Users\leand\Documents\Visual Studio 2017\C#\shopeeleo\shopeeleo\SiteVendas\obj\Debug\netcoreapp2.2\SiteVendas.pdb
+C:\Users\leand\Documents\Visual Studio 2017\C#\shopeeleo\shopeeleo\SiteVendas\obj\Debug\netcoreapp2.2\Razor\Views\Produto\Details2.g.cshtml.cs
